@@ -60,7 +60,7 @@ public class MorningActivity extends AppCompatActivity {
                 properties.setProperty("password","***"); //user
                 properties.setProperty("useUnicode","true");
                 properties.setProperty("characterEncoding","UTF-8");
-                con = DriverManager.getConnection("**", properties);
+                con = DriverManager.getConnection("jdbc:mysql:/***", properties);
 //185.26.122.51
                 PreparedStatement insert = con.prepareStatement("INSERT INTO users " + "VALUES (null, ?, curdate(), curtime(),'пришел(-а)')");
                 insert.setString(1, fio);

@@ -1,6 +1,8 @@
 package com.exemple.kiselrv.myapplication1707;
 
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,24 +18,42 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class AdminActivity extends AppCompatActivity {
+public class AdminActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
 
     public RecyclerView recyclerView;
     public MyAdapter adapter;
     public List<Item> items; //поменяна с прайвета и те, что выше тоже
     final String LOG_TAG = "myLogs";
     public Integer sizeItems1;
+    private SwipeRefreshLayout mSwipeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
+        mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
+        mSwipeLayout.setOnRefreshListener(this);
+        mSwipeLayout.setColorSchemeResources( //цвета прокрутки рефреша
+                R.color.colorPrimary, R.color.colorAccent);
+
         items = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         new MyTask().execute();
+    }
+
+    @Override
+    public void onRefresh() {
+        items.clear();
+        new MyTask().execute();
+        new Handler().postDelayed(new Runnable() { //время прокрутки рефреша 5000
+            @Override
+            public void run() {
+                mSwipeLayout.setRefreshing(false);
+            }
+        }, 5000);
     }
 
     private class MyTask extends AsyncTask<Void, Void, List> {
