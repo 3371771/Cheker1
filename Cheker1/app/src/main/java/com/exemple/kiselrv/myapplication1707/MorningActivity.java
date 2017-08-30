@@ -56,20 +56,15 @@ public class MorningActivity extends AppCompatActivity {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 Properties properties=new Properties();
-                properties.setProperty("user","host1213291_test"); //user
-                properties.setProperty("password","NdxW0YY2"); //user
+                properties.setProperty("user","***"); //user
+                properties.setProperty("password","***"); //user
                 properties.setProperty("useUnicode","true");
                 properties.setProperty("characterEncoding","UTF-8");
-                con = DriverManager.getConnection("jdbc:mysql://mysql51.hostland.ru/host1213291_test", properties);
+                con = DriverManager.getConnection("**", properties);
 //185.26.122.51
-                //
-
                 PreparedStatement insert = con.prepareStatement("INSERT INTO users " + "VALUES (null, ?, curdate(), curtime(),'пришел(-а)')");
                 insert.setString(1, fio);
                 insert.executeUpdate();
-
-//                Statement st = con.createStatement();
-//                final ResultSet rs = st.executeUpdate( "INSERT FROM users + fio");
 
                 Log.d(LOG_TAG, "есть подключение к БД");
             } catch (java.sql.SQLException e) {

@@ -1,7 +1,6 @@
 package com.exemple.kiselrv.myapplication1707;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,7 +15,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<Item> items;
     private Context mContext;
 
-    public MyAdapter(List<Item> items, Context mContext) {
+    public MyAdapter(List<Item> items, Context mContext) { //конструктор
         this.items = items;
         this.mContext = mContext;
     }
@@ -24,7 +23,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item, parent, false);
-
         return new ViewHolder(v);
     }
 

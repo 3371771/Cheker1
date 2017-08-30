@@ -1,15 +1,11 @@
 package com.exemple.kiselrv.myapplication1707;
 
 import android.content.SharedPreferences;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class WhoActivity extends AppCompatActivity implements View.OnClickListener{
@@ -39,8 +35,6 @@ public class WhoActivity extends AppCompatActivity implements View.OnClickListen
         ed.putString("saved_name2", edit_who2.getText().toString());
         ed.apply();
 
-        //
         Toast.makeText(WhoActivity.this, "Данные сохранены", Toast.LENGTH_SHORT).show();
     }
 }
-

@@ -31,11 +31,10 @@ public class EveningActivity extends AppCompatActivity {
         Animation anim =  AnimationUtils.loadAnimation(this, R.anim.myanim2);
         imageView.startAnimation(anim);
 
+        //загрузка имен из SharedPreferences с лэйаута Представиться (для вывода и передачи в БД)
         SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
         fio = pref.getString("saved_name", "").toString();
         fio2 = pref.getString("saved_name2", "").toString();
-
-
         textView11 = (TextView)findViewById(R.id.textView11);
         textView11.setText(fio2);
     }
@@ -57,11 +56,11 @@ public class EveningActivity extends AppCompatActivity {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 Properties properties=new Properties();
-                properties.setProperty("user","host1213291_test"); //user
-                properties.setProperty("password","NdxW0YY2"); //user
+                properties.setProperty("user","***"); //user
+                properties.setProperty("password","***"); //user
                 properties.setProperty("useUnicode","true");
                 properties.setProperty("characterEncoding","UTF-8");
-                con = DriverManager.getConnection("jdbc:mysql://mysql51.hostland.ru/host1213291_test", properties);
+                con = DriverManager.getConnection("jdbc:mysql://***", properties);
 //185.26.122.51
                 //con = DriverManager.getConnection("jdbc:mysql://192.168.0.2:3306/cheker", properties); домашняя БД
 
@@ -71,9 +70,6 @@ public class EveningActivity extends AppCompatActivity {
                 insert.close();
                 con.close();
 
-//                Statement st = con.createStatement();
-//                final ResultSet rs = st.executeUpdate( "INSERT FROM users + fio");
-
                 Log.d(LOG_TAG, "есть подключение к БД");
             } catch (java.sql.SQLException e) {
                 Log.d(LOG_TAG, "ошибка подключения к БД");
@@ -81,9 +77,7 @@ public class EveningActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             return null;
-
         }
     }
 }

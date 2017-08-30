@@ -4,14 +4,13 @@
     android:installLocation="preferExternal">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/bez2"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:screenOrientation="portrait">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -24,13 +23,18 @@
         </activity>
         <activity
             android:name=".MorningActivity"
-            android:label="Вход"></activity>
+            android:label="Вход"
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".EveningActivity"
-            android:label="Выход"></activity>
+            android:label="Выход"
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".WhoActivity"
-            android:label="Представиться"></activity>
+            android:label="Представиться">
+        </activity>
         <activity android:name=".AdminActivity"
             android:label="Панель администратора">
         </activity>
