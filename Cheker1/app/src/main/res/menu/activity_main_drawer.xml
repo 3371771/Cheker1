@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_info"
+            android:icon="@drawable/ic_info_black_24dp"
+            android:title="@string/about_app" />
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@drawable/ic_live_help"
+            android:title="@string/help" />
+        <item
+            android:id="@+id/nav_who"
+            android:icon="@drawable/ic_login"
+            android:title="@string/who_is_it" />
+    </group>
+
+    <!--<item1 android:title="Communicate">-->
+        <!--<menu>-->
+            <!--<item1-->
+                <!--android:id="@+id/nav_share"-->
+                <!--android:icon="@drawable/ic_menu_share"-->
+                <!--android:title="Share" />-->
+            <!--<item1-->
+                <!--android:id="@+id/nav_send"-->
+                <!--android:icon="@drawable/ic_menu_send"-->
+                <!--android:title="Send" />-->
+        <!--</menu>-->
+    <!--</item1>-->
+</menu>

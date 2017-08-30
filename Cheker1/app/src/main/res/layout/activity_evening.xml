@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.exemple.kiselrv.myapplication1707.EveningActivity">
+    <!--//android:layout_margin="16dp"-->
+    <!--android:background="@drawable/evening51"-->
+
+    <ImageView
+        android:src="@drawable/evening51"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="158dp"
+        android:layout_height="158dp"
+        android:layout_marginBottom="@dimen/layout_margin_bottom"
+        android:layout_marginLeft="@dimen/layout_margin_left"
+        android:layout_marginTop="@dimen/layout_margin_top"
+        app:srcCompat="@drawable/moon"
+        />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView"
+        android:layout_marginTop="@dimen/layout_margin_top"
+        android:layout_marginRight="@dimen/layout_margin_min"
+        android:layout_marginLeft="@dimen/layout_margin_left"
+        android:text="Всего доброго"
+        android:textColor="@android:color/white"
+        android:textAppearance="?android:textAppearanceMedium"
+        />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/textView10"
+        android:layout_alignBaseline="@id/textView10"
+        android:text=""
+        android:textColor="@android:color/white"
+        android:textAppearance="?android:textAppearanceMedium"
+        />
+
+</RelativeLayout>
