@@ -1,9 +1,10 @@
-package com.exemple.kiselrv.myapplication1707;
+package com.vkr.ksenija_i.IN_OUT;
 
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -15,18 +16,23 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.util.Properties;
 
+import com.vkr.ksenija_i.IN_OUT.R;
+
 public class EveningActivity extends AppCompatActivity {
 
     ImageView imageView;
     TextView textView11;
     final String LOG_TAG = "myLogs";
     String fio,fio2;
+    public Db_conn dbConn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evening);
+
         new MyTask().execute();
+
         imageView = (ImageView) findViewById(R.id.imageView);
         Animation anim =  AnimationUtils.loadAnimation(this, R.anim.myanim2);
         imageView.startAnimation(anim);
@@ -35,6 +41,7 @@ public class EveningActivity extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
         fio = pref.getString("saved_name", "").toString();
         fio2 = pref.getString("saved_name2", "").toString();
+
         textView11 = (TextView)findViewById(R.id.textView11);
         textView11.setText(fio2);
     }
@@ -42,33 +49,16 @@ public class EveningActivity extends AppCompatActivity {
     private class MyTask extends AsyncTask<Void, Void, String> {
         @Override
         protected String doInBackground(Void... voids) {
-//            try {
-//                Class.forName("com.mysql.jdbc.Driver");
-//                Log.d(LOG_TAG, "--- Driver is conected!!! ---");
-//            } catch (ClassNotFoundException e) {
-//                Log.d(LOG_TAG, "--- Driver is NOT conected!!! ---");
-//                Log.d(LOG_TAG, e.toString());
-//                e.printStackTrace();
-//                return null;
-//            }
-            Connection con;
-
+            dbConn = new Db_conn();
+            Connection dbConnection;
             try {
-                Class.forName("com.mysql.jdbc.Driver");
-                Properties properties=new Properties();
-                properties.setProperty("user","***"); //user
-                properties.setProperty("password","***"); //user
-                properties.setProperty("useUnicode","true");
-                properties.setProperty("characterEncoding","UTF-8");
-                con = DriverManager.getConnection("jdbc:mysql://***", properties);
-//185.26.122.51
-                //con = DriverManager.getConnection("jdbc:mysql://192.168.0.2:3306/cheker", properties); домашняя БД
+                dbConnection  = dbConn.getDBConnection();
 
-                PreparedStatement insert = con.prepareStatement("INSERT INTO users " + "VALUES (null, ?, curdate(), curtime(),'ушел(-а)')");
+                PreparedStatement insert = dbConnection.prepareStatement("INSERT INTO users " + "VALUES (null, ?, curdate(), curtime(),'ушел(-а)')");
                 insert.setString(1, fio);
                 insert.executeUpdate();
                 insert.close();
-                con.close();
+                dbConnection.close();
 
                 Log.d(LOG_TAG, "есть подключение к БД");
             } catch (java.sql.SQLException e) {

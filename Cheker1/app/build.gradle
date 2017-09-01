@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.0"
     defaultConfig {
-        applicationId "com.exemple.kiselrv.myapplication1707"
+        applicationId "com.vkr.kiselrv.IN_OUT"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
@@ -25,11 +25,11 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile files('libs/mysql-connector-java-5.1.42-bin.jar')
+    //зависимости для работы recyclerview и cardview
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:26.+'
     compile 'com.android.support:support-v4:26.+'
-    //зависимости для работы recyclerview и cardview
     compile 'com.android.support:recyclerview-v7:26.+'
     compile 'com.android.support:cardview-v7:26.+'
     testCompile 'junit:junit:4.12'

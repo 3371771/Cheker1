@@ -1,8 +1,7 @@
-package com.exemple.kiselrv.myapplication1707;
+package com.vkr.ksenija_i.IN_OUT;
 
 import android.app.DialogFragment;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
@@ -12,7 +11,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Menu;
@@ -23,17 +21,9 @@ import android.widget.Toast;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
-    Button enter, exit, admin,button3;
+    Button enter, exit, admin,button3,button_clear;
     DialogFragment dialog_info;
     MenuItem name;
     TextView textView14;
@@ -52,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         admin = (Button) findViewById(R.id.admin);
         admin.setOnClickListener(this);
         dialog_info = new Dialod_info();
+
+        button_clear = (Button)findViewById(R.id.button_clear);
+        button_clear.setOnClickListener(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -92,12 +85,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
+    public boolean onPrepareOptionsMenu (Menu menu){
         SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
         name = menu.findItem(R.id.fio);
         String name1 = (pref.getString("saved_name", "").toString());
         name.setTitle(name1);
         return super.onPrepareOptionsMenu(menu);
+
+
     }
 
     @Override
@@ -135,10 +130,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent4 = new Intent(this, AdminActivity.class);
                 startActivity(intent4);
                 break;
+            case R.id.button_clear:
+                clear();
+                break;
             default:
                 break;
         }
     }
+
 
     @Override
     public void onBackPressed() {
@@ -173,5 +172,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+//функция очищения SharedPreferences + обновление имени вверху
+    public void clear() {
+        SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
+        SharedPreferences.Editor ed = pref.edit();
+        ed.clear().apply();
+
+        String name1 = (pref.getString("saved_name", "").toString());
+        name.setTitle(name1);
     }
 }

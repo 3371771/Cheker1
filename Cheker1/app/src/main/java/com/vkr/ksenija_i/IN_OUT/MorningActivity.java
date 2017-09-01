@@ -1,4 +1,4 @@
-package com.exemple.kiselrv.myapplication1707;
+package com.vkr.ksenija_i.IN_OUT;
 
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -20,7 +20,8 @@ public class MorningActivity extends AppCompatActivity {
     ImageView imageView;
     TextView textView9;
     final String LOG_TAG = "myLogs";
-    String fio,fio2;
+    String fio, fio2;
+    public Db_conn dbConn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,34 +36,18 @@ public class MorningActivity extends AppCompatActivity {
         fio = pref.getString("saved_name", "").toString();
         fio2 = pref.getString("saved_name2", "").toString();
 
-        textView9 = (TextView)findViewById(R.id.textView9);
+        textView9 = (TextView) findViewById(R.id.textView9);
         textView9.setText(fio2);
     }
 
     private class MyTask extends AsyncTask<Void, Void, String> {
         @Override
         protected String doInBackground(Void... voids) {
-//            try {
-//                Class.forName("com.mysql.jdbc.Driver");
-//                Log.d(LOG_TAG, "--- Driver is conected!!! ---");
-//            } catch (ClassNotFoundException e) {
-//                Log.d(LOG_TAG, "--- Driver is NOT conected!!! ---");
-//                Log.d(LOG_TAG, e.toString());
-//                e.printStackTrace();
-//                return null;
-//            }
-            Connection con;
-
+            dbConn = new Db_conn();
+            Connection dbConnection;
             try {
-                Class.forName("com.mysql.jdbc.Driver");
-                Properties properties=new Properties();
-                properties.setProperty("user","***"); //user
-                properties.setProperty("password","***"); //user
-                properties.setProperty("useUnicode","true");
-                properties.setProperty("characterEncoding","UTF-8");
-                con = DriverManager.getConnection("jdbc:mysql:/***", properties);
-//185.26.122.51
-                PreparedStatement insert = con.prepareStatement("INSERT INTO users " + "VALUES (null, ?, curdate(), curtime(),'пришел(-а)')");
+                dbConnection = dbConn.getDBConnection();
+                PreparedStatement insert = dbConnection.prepareStatement("INSERT INTO users " + "VALUES (null, ?, curdate(), curtime(),'пришел(-а)')");
                 insert.setString(1, fio);
                 insert.executeUpdate();
 
@@ -75,5 +60,7 @@ public class MorningActivity extends AppCompatActivity {
             }
             return null;
         }
+
     }
+
 }

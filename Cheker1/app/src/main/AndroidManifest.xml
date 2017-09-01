@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.exemple.kiselrv.myapplication1707"
+    package="com.vkr.ksenija_i.IN_OUT"
     android:installLocation="preferExternal">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
 
+    <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
     <application
         android:allowBackup="true"
         android:icon="@drawable/bez2"
@@ -24,19 +24,36 @@
         <activity
             android:name=".MorningActivity"
             android:label="Вход"
+            android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.vkr.ksenija_i.IN_OUT.MainActivity" />
         </activity>
         <activity
             android:name=".EveningActivity"
             android:label="Выход"
+            android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.vkr.ksenija_i.IN_OUT.MainActivity" />
         </activity>
         <activity
             android:name=".WhoActivity"
+            android:parentActivityName=".MainActivity"
             android:label="Представиться">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.vkr.ksenija_i.IN_OUT.MainActivity" />
         </activity>
-        <activity android:name=".AdminActivity"
+        <activity
+            android:name=".AdminActivity"
+            android:parentActivityName=".MainActivity"
             android:label="Панель администратора">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.vkr.ksenija_i.IN_OUT.MainActivity" />
         </activity>
     </application>
 

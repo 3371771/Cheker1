@@ -1,4 +1,4 @@
-package com.exemple.kiselrv.myapplication1707;
+package com.vkr.ksenija_i.IN_OUT;
 
 import org.junit.Test;
 

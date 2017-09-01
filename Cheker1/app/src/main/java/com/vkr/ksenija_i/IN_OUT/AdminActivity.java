@@ -1,4 +1,4 @@
-package com.exemple.kiselrv.myapplication1707;
+package com.vkr.ksenija_i.IN_OUT;
 
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -25,6 +25,7 @@ public class AdminActivity extends AppCompatActivity implements SwipeRefreshLayo
     public List<Item> items; //поменяна с прайвета и те, что выше тоже
     final String LOG_TAG = "myLogs";
     public Integer sizeItems1;
+    public Db_conn dbConn;
     private SwipeRefreshLayout mSwipeLayout;
 
     @Override
@@ -62,35 +63,19 @@ public class AdminActivity extends AppCompatActivity implements SwipeRefreshLayo
 
         @Override
         protected List doInBackground(Void... params) {
-//            try {
-//                Class.forName("com.mysql.jdbc.Driver");
-//                Log.d(LOG_TAG, "--- Driver is conected!!! ---");
-//            } catch (ClassNotFoundException e) {
-//                Log.d(LOG_TAG, "--- Driver is NOT conected!!! ---");
-//                Log.d(LOG_TAG, e.toString());
-//                e.printStackTrace();
-//                return null;
-//            }
-            Connection con;
-
+            dbConn = new Db_conn();
+            Connection dbConnection;
             try {
-                Class.forName("com.mysql.jdbc.Driver");
-                Properties properties=new Properties();
-                properties.setProperty("user","***"); //user
-                properties.setProperty("password","***"); //user
-                properties.setProperty("useUnicode","true");
-                properties.setProperty("characterEncoding","UTF-8");
-                con = DriverManager.getConnection("jdbc:mysql://***", properties);
-                //  получение массива до st.close();
-                // Statement st = con.createStatement();
-                Statement st = con.createStatement();
+                dbConnection  = dbConn.getDBConnection();
+            //  получение массива до st.close();
+                Statement st = dbConnection.createStatement();
                 ResultSet rs = st.executeQuery("SELECT fio, DATE_FORMAT(дата, '%d.%m.%Y'), время, вход FROM users ORDER BY id DESC LIMIT 0,5");
-                // в лимите пишется сколько отобразить записей
+                // в лимите пишется сколько отобразить записей (с какокй по какую)
                 while (rs.next()) {
                     items1.add(new Item(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)));
                 }
-                // st.close();
-                // con.close();
+                 st.close();
+                 dbConnection.close();
 
                 Log.d(LOG_TAG, "есть подключение к БД");
             } catch (java.sql.SQLException e) {
@@ -109,7 +94,7 @@ public class AdminActivity extends AppCompatActivity implements SwipeRefreshLayo
                items.add(new Item(items1.get(i).getFio(),items1.get(i).getDate(),items1.get(i).getTime(),items1.get(i).getVhod()));
             }
         //    Collections.copy(items, items1); //коприрование, но не работает
-            adapter = new MyAdapter(items, com.exemple.kiselrv.myapplication1707.AdminActivity.this);
+            adapter = new MyAdapter(items, AdminActivity.this);
             recyclerView.setAdapter(adapter);
             super.onPostExecute(result);
         }

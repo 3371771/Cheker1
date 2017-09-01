@@ -1,4 +1,4 @@
-package com.exemple.kiselrv.myapplication1707;
+package com.vkr.ksenija_i.IN_OUT;
 
 public class Item {
     private String fio;

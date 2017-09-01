@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.exemple.kiselrv.myapplication1707.MainActivity">
+    tools:context="com.vkr.ksenija_i.IN_OUT.com.exemple.kiselrv.INOUT.MainActivity">
     <item
         android:id="@+id/fio"
         android:title=""

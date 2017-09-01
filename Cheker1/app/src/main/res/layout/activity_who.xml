@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/layout_margin"
-    tools:context="com.exemple.kiselrv.myapplication1707.WhoActivity"
+    tools:context="com.vkr.ksenija_i.IN_OUT.WhoActivity"
     tools:layout_editor_absoluteY="81dp"
     tools:layout_editor_absoluteX="0dp">
 
@@ -30,6 +30,26 @@
         android:layout_margin="@dimen/layout_margin_min"
         android:layout_below="@+id/textView12" />
 
+    <TextView
+        android:id="@+id/textView_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Пароль"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/black"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editText"
+        android:layout_margin="@dimen/layout_margin_min"/>
+
+    <EditText
+        android:id="@+id/editText_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:inputType="textPassword"
+        android:layout_margin="@dimen/layout_margin_min"
+        android:layout_below="@+id/textView_pass" />
+
     <!--android:ems="12" Это ширина элемента в буквах (10 букв)
      можно остаить так или убрать и поставить
      android:layout_width="match_parent"-->
@@ -39,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/layout_margin_top"
-        android:layout_below="@id/editText"
+        android:layout_below="@id/editText_pass"
         android:layout_alignLeft="@+id/editText2"
         android:layout_alignStart="@+id/editText2"
         android:text="Как к вам обращяться?"
@@ -66,7 +86,21 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="@string/button_save"
+        android:text="@string/button_enterence"
         />
+
+    <TextView
+        android:id="@+id/text_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_margin_top"
+        android:layout_below="@id/editText2"
+        android:layout_alignLeft="@+id/editText2"
+        android:layout_alignStart="@+id/editText2"
+        android:text="2"
+        android:textColor="@android:color/black"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        />
+
 
 </RelativeLayout>

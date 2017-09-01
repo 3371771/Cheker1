@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/container"
-    tools:context="com.exemple.kiselrv.myapplication1707.MainActivity">
+    tools:context="com.vkr.ksenija_i.IN_OUT.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
