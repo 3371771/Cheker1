@@ -27,7 +27,7 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintVertical_bias="0.307"
-        android:text="@string/what_to_do"
+        android:text="Пожалуйста, выполните вход"
         android:textColor="#000000"
         android:textAlignment="center"
         android:textSize="24sp"
@@ -79,14 +79,5 @@
         android:text="Admin"
         />
 
-    <Button
-        android:id="@+id/button_clear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:text="очистить"
-        tools:layout_editor_absoluteY="391dp"
-        tools:layout_editor_absoluteX="16dp" />
 
 </android.support.constraint.ConstraintLayout>

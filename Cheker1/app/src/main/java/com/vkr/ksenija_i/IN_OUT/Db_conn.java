@@ -17,11 +17,11 @@ public class Db_conn {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Properties properties = new Properties();
-            properties.setProperty("user", "*"); //user
-            properties.setProperty("password", "*"); //user
+            properties.setProperty("user", "**"); //user
+            properties.setProperty("password", "**"); //user
             properties.setProperty("useUnicode", "true");
             properties.setProperty("characterEncoding", "UTF-8");
-            dbConnection = DriverManager.getConnection("jdbc:mysql://mysql51.hostland.ru/*", properties);
+            dbConnection = DriverManager.getConnection("jdbc:mysql://mysql51.hostland.ru/**", properties);
             return dbConnection;
 
         } catch (java.sql.SQLException e) {

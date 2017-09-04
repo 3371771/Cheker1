@@ -15,6 +15,5 @@
     <string name="about_app">О приложении</string>
     <string name="help">Тех.поддержка</string>
     <string name="who_is_it">Представиться</string>
-    <string name="what_to_do">Приложите телефон к метке</string>
     <string name="title_activity_main2">Main2Activity</string>
 </resources>
