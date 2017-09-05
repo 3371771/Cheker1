@@ -202,16 +202,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         String name1 = (pref.getString("saved_name", "").toString());
         name.setTitle(name1);
+
+        enter.setVisibility(View.INVISIBLE);
+        exit.setVisibility(View.INVISIBLE);
+        enter.setClickable(false);
+        exit.setClickable(false);
     }
 
     public void triggers () { // показывает надпись в зависимости от того выполнен вход или нет
         SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
         trigger = pref.getString("trigger","").toString();
-
         textView = (TextView) findViewById(R.id.textView);
 
         if (trigger.equals("1")) {
             textView.setText("Приложите телефон к метке");
-        } else textView.setText("Пожалуйста, выполните вход");
+            exit.setVisibility(View.VISIBLE);
+            enter.setVisibility(View.VISIBLE);
+            exit.setClickable(true);
+            enter.setClickable(true);
+        } else
+            {textView.setText("Пожалуйста, выполните вход");
+                enter.setVisibility(View.INVISIBLE);
+                exit.setVisibility(View.INVISIBLE);
+                enter.setClickable(false);
+                exit.setClickable(false);
+            }
     }
 }

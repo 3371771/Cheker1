@@ -9,7 +9,7 @@
     <!--android:background="@drawable/evening51"-->
 
     <ImageView
-        android:src="@drawable/evening51"
+        android:src="@mipmap/evening5_1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"

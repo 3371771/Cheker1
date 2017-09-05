@@ -32,7 +32,6 @@ public class WhoActivity extends AppCompatActivity implements View.OnClickListen
         edit_who = (EditText) findViewById(R.id.editText);
         edit_who2 = (EditText) findViewById(R.id.editText2);
         editText_pass = (EditText) findViewById(R.id.editText_pass);
-
         btn_save = (Button) findViewById(R.id.button_save);
         btn_save.setOnClickListener(this);
     }
@@ -57,7 +56,6 @@ public class WhoActivity extends AppCompatActivity implements View.OnClickListen
         ed.putString("saved_name", edit_who.getText().toString());
         ed.putString("saved_name2", edit_who2.getText().toString());
         ed.apply();
-
     }
 
     private class MyTask extends AsyncTask<Void, Void, String> {
