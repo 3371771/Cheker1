@@ -3,15 +3,24 @@
     package="com.vkr.ksenija_i.IN_OUT"
     android:installLocation="preferExternal">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-sdk android:minSdkVersion="15" />
 
-    <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- ниже обязательное наличие НФС -->
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
     <application
         android:allowBackup="true"
         android:icon="@drawable/bez2"
+        android:largeHeap="true"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:largeHeap="true">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -42,20 +51,32 @@
         </activity>
         <activity
             android:name=".WhoActivity"
-            android:parentActivityName=".MainActivity"
-            android:label="Представиться">
+            android:label="Представиться"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.vkr.ksenija_i.IN_OUT.MainActivity" />
         </activity>
         <activity
             android:name=".AdminActivity"
-            android:parentActivityName=".MainActivity"
-            android:label="Панель администратора">
+            android:label="Панель администратора"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.vkr.ksenija_i.IN_OUT.MainActivity" />
+
         </activity>
+
+        <activity android:name=".Render" android:noHistory="true" >
+            <!-- автоматический запуск при контакте с НФСИ -->
+            <intent-filter>
+                <action android:name="android.nfc.action.TAG_DISCOVERED" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

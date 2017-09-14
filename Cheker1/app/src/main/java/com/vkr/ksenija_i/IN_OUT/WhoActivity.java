@@ -1,5 +1,6 @@
 package com.vkr.ksenija_i.IN_OUT;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -105,8 +106,12 @@ public class WhoActivity extends AppCompatActivity implements View.OnClickListen
 
             if (trigger.equals("1")) {
                 Toast.makeText(WhoActivity.this, "Вы вошли, как " + fio, Toast.LENGTH_SHORT).show();
+                Intent intent_back;
+                intent_back = new Intent (com.vkr.ksenija_i.IN_OUT.WhoActivity.this,MainActivity.class);
+                startActivity(intent_back);
             } else {
                 Toast.makeText(WhoActivity.this, "Неверный логин или пароль", Toast.LENGTH_SHORT).show();
+                ed.clear().apply();
             }
             super.onPostExecute(s);
         }

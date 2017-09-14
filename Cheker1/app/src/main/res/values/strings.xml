@@ -16,4 +16,5 @@
     <string name="help">Тех.поддержка</string>
     <string name="who_is_it">Представиться</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="ok_detection">ok</string>
 </resources>

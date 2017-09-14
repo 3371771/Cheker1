@@ -23,11 +23,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
-    Button enter, exit, admin;
+    Button admin;
     DialogFragment dialog_info;
     MenuItem name;
     TextView textView;
-    String trigger,get_admin;
+    String trigger, get_admin;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +36,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        enter = (Button) findViewById(R.id.button);
-        enter.setClickable(false);
-        enter.setOnClickListener(this);
-        exit = (Button) findViewById(R.id.button2);
-        exit.setClickable(false);
-        exit.setOnClickListener(this);
         admin = (Button) findViewById(R.id.admin);
         admin.setOnClickListener(this);
         dialog_info = new Dialod_info();
@@ -52,7 +47,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (get_admin.equals("Admin")) {
             admin.setVisibility(View.VISIBLE);
             admin.setClickable(true);
-        } else {admin.setVisibility(View.INVISIBLE);
+            textView.setText("Админка");
+        } else {
+            admin.setVisibility(View.INVISIBLE);
             admin.setClickable(false);
         }
 
@@ -61,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View view) { //в зависимости от входа
                 SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
-                trigger = pref.getString("trigger","").toString();
+                trigger = pref.getString("trigger", "").toString();
 
                 if (trigger.equals("1")) {
                     Snackbar.make(view, "Выйти?", Snackbar.LENGTH_LONG)
@@ -74,8 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     admin.setClickable(false);
                                 }
                             }).show();
-                }
-                else {
+                } else {
                     Snackbar.make(view, "Войти?", Snackbar.LENGTH_LONG)
                             .setAction("Да", new View.OnClickListener() {
                                 @Override
@@ -86,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 }
                             }).show();
                 }
-        }
+            }
         });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -112,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public boolean onPrepareOptionsMenu (Menu menu){
+    public boolean onPrepareOptionsMenu(Menu menu) {
         SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
         name = menu.findItem(R.id.fio);
         String name1 = (pref.getString("saved_name", "").toString());
@@ -138,26 +134,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        int id = view.getId();
-        switch (id) {
-            case R.id.button:
-                Intent intent2;
-                intent2 = new Intent(this, MorningActivity.class);
-                startActivity(intent2);
-                break;
-            case R.id.button2:
-                Intent intent3;
-                intent3 = new Intent(this, EveningActivity.class);
-                startActivity(intent3);
-                break;
-            case R.id.admin:
-                Intent intent4;
-                intent4 = new Intent(this, AdminActivity.class);
-                startActivity(intent4);
-                break;
-            default:
-                break;
-        }
+        Intent intent4;
+        intent4 = new Intent(this, AdminActivity.class);
+        startActivity(intent4);
+
     }
 
     @Override
@@ -194,7 +174,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-//функция очищения SharedPreferences + обновление имени вверху
+
+    //функция очищения SharedPreferences + обновление имени вверху
     public void clear() {
         SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
         SharedPreferences.Editor ed = pref.edit();
@@ -202,30 +183,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         String name1 = (pref.getString("saved_name", "").toString());
         name.setTitle(name1);
-
-        enter.setVisibility(View.INVISIBLE);
-        exit.setVisibility(View.INVISIBLE);
-        enter.setClickable(false);
-        exit.setClickable(false);
     }
 
-    public void triggers () { // показывает надпись в зависимости от того выполнен вход или нет
+    public void triggers() { // показывает надпись в зависимости от того выполнен вход или нет
         SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
-        trigger = pref.getString("trigger","").toString();
+        trigger = pref.getString("trigger", "").toString();
         textView = (TextView) findViewById(R.id.textView);
 
         if (trigger.equals("1")) {
             textView.setText("Приложите телефон к метке");
-            exit.setVisibility(View.VISIBLE);
-            enter.setVisibility(View.VISIBLE);
-            exit.setClickable(true);
-            enter.setClickable(true);
-        } else
-            {textView.setText("Пожалуйста, выполните вход");
-                enter.setVisibility(View.INVISIBLE);
-                exit.setVisibility(View.INVISIBLE);
-                enter.setClickable(false);
-                exit.setClickable(false);
-            }
+        } else {
+            textView.setText("Пожалуйста, выполните вход");
+        }
     }
 }
