@@ -8,7 +8,7 @@
     <!--android:layout_margin="16dp"-->
 
     <ImageView
-        android:src="@mipmap/morning"
+        android:src="@mipmap/morning_1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
@@ -34,7 +34,8 @@
         android:layout_marginLeft="@dimen/layout_margin_left"
         android:text="Доброе утро"
         android:textColor="@android:color/black"
-        android:textAppearance="?android:textAppearanceMedium"
+        android:textStyle="bold"
+        android:textAppearance="?android:textAppearanceLarge"
         />
 
     <TextView
@@ -45,7 +46,8 @@
         android:layout_alignBaseline="@id/textView8"
         android:text=""
         android:textColor="@android:color/black"
-        android:textAppearance="?android:textAppearanceMedium"
+        android:textStyle="bold"
+        android:textAppearance="?android:textAppearanceLarge"
         />
 
 </RelativeLayout>

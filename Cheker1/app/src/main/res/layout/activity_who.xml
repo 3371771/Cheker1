@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,8 +11,7 @@
     tools:context="com.vkr.ksenija_i.IN_OUT.WhoActivity"
     tools:layout_editor_absoluteY="81dp"
     tools:layout_editor_absoluteX="0dp">
-
-    <TextView
+        <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,7 +22,7 @@
         android:layout_alignParentTop="true"
         android:layout_margin="@dimen/layout_margin_min"/>
 
-    <EditText
+        <EditText
         android:id="@+id/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,7 +32,7 @@
         android:layout_margin="@dimen/layout_margin_min"
         android:layout_below="@+id/textView12" />
 
-    <TextView
+        <TextView
         android:id="@+id/textView_pass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,7 +43,7 @@
         android:layout_below="@+id/editText"
         android:layout_margin="@dimen/layout_margin_min"/>
 
-    <EditText
+        <EditText
         android:id="@+id/editText_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,7 +56,7 @@
      можно остаить так или убрать и поставить
      android:layout_width="match_parent"-->
 
-    <TextView
+        <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -67,7 +69,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         />
 
-    <EditText
+        <EditText
         android:id="@+id/editText2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -80,7 +82,7 @@
         android:hint="@string/fio_hint2"
         />
 
-    <Button
+        <Button
         android:id="@+id/button_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -89,4 +91,12 @@
         android:text="@string/button_enterence"
         />
 
+    <ProgressBar
+        android:id="@+id/my_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView12"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"/>
 </RelativeLayout>

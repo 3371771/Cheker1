@@ -54,7 +54,7 @@ public class AdminActivity extends AppCompatActivity implements SwipeRefreshLayo
             public void run() {
                 mSwipeLayout.setRefreshing(false);
             }
-        }, 5000);
+        }, 4000);
     }
 
     private class MyTask extends AsyncTask<Void, Void, List> {
@@ -69,7 +69,7 @@ public class AdminActivity extends AppCompatActivity implements SwipeRefreshLayo
                 dbConnection  = dbConn.getDBConnection();
             //  получение массива до st.close();
                 Statement st = dbConnection.createStatement();
-                ResultSet rs = st.executeQuery("SELECT fio, DATE_FORMAT(дата, '%d.%m.%Y'), время, вход FROM users ORDER BY id DESC LIMIT 0,5");
+                ResultSet rs = st.executeQuery("SELECT fio, DATE_FORMAT(дата, '%d.%m.%Y'), время, вход FROM users ORDER BY id DESC LIMIT 0,15");
                 // в лимите пишется сколько отобразить записей (с какокй по какую)
                 while (rs.next()) {
                     items1.add(new Item(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)));

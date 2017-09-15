@@ -5,18 +5,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:divider="@drawable/separator"
-    android:dividerPadding="3dp">
+    android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card"
+        style="@style/CardView"
         android:layout_width="match_parent"
         android:layout_height="72dp"
+        card_view:cardCornerRadius="2dp"
         card_view:cardElevation="2dp"
-        card_view:cardCornerRadius="4dp"
-        style="@style/CardView">
+        card_view:cardUseCompatPadding="true">
         <!--android:elevation="1dp"-->
         <RelativeLayout
             android:layout_width="match_parent"
@@ -29,8 +27,7 @@
                 android:layout_height="wrap_content"
                 android:text="FIO"
                 android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@android:color/black"
-                />
+                android:textColor="@android:color/black" />
 
             <TextView
                 android:id="@+id/date"
@@ -38,31 +35,30 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:text="date"
-                android:textAppearance="?android:textAppearanceSmall"
-                />
+                android:textAppearance="?android:textAppearanceSmall" />
 
             <TextView
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/layout_margin_min"
-                android:layout_marginLeft="@dimen/layout_margin_min"
-                android:layout_toRightOf="@id/date"
                 android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/layout_margin_min"
+                android:layout_marginTop="@dimen/layout_margin_min"
+                android:layout_toRightOf="@id/date"
                 android:text="time"
-                android:textAppearance="?android:textAppearanceSmall"
-                />
+                android:textAppearance="?android:textAppearanceSmall" />
 
             <TextView
                 android:id="@+id/vhod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="@dimen/layout_margin_min"
+                android:layout_marginBottom="@dimen/layout_margin_min"
                 android:text="vhod"
                 android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@android:color/black"
-                />
+                android:textColor="@android:color/black" />
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

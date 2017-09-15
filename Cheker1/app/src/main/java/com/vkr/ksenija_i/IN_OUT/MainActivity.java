@@ -47,28 +47,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (get_admin.equals("Admin")) {
             admin.setVisibility(View.VISIBLE);
             admin.setClickable(true);
-            textView.setText("Админка");
+            textView.setText("");
         } else {
             admin.setVisibility(View.INVISIBLE);
             admin.setClickable(false);
         }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        SharedPreferences pref1 = getSharedPreferences("main", MODE_PRIVATE);
+        trigger = pref1.getString("trigger", "").toString();
+        if (trigger.equals("1")) {
+            fab.setImageResource(R.drawable.ic_exit_to_app_black_24dp);
+        } else {
+            fab.setImageResource(R.drawable.ic_person_black_24dp);
+        }
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { //в зависимости от входа
-                SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
-                trigger = pref.getString("trigger", "").toString();
+
+                SharedPreferences pref1 = getSharedPreferences("main", MODE_PRIVATE);
+                trigger = pref1.getString("trigger", "").toString();
 
                 if (trigger.equals("1")) {
                     Snackbar.make(view, "Выйти?", Snackbar.LENGTH_LONG)
                             .setAction("Да", new View.OnClickListener() {
                                 @Override
-                                public void onClick(View view) {
+                                public void onClick( View view) {
                                     clear();
                                     textView.setText("Пожалуйста, выполните вход");
                                     admin.setVisibility(View.INVISIBLE);
                                     admin.setClickable(false);
+                                    fab.setImageResource(R.drawable.ic_person_black_24dp);
                                 }
                             }).show();
                 } else {
@@ -125,6 +134,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String fio = pref.getString("saved_name", "").toString();
             //
             Toast toast = Toast.makeText(this, "Вы вошли как " + fio, Toast.LENGTH_SHORT);
+            TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+            if( v != null) v.setGravity(Gravity.CENTER);
+            toast.show();
             toast.setGravity(Gravity.TOP, 0, 70);
             toast.show();
             return true;
@@ -137,7 +149,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent4;
         intent4 = new Intent(this, AdminActivity.class);
         startActivity(intent4);
-
     }
 
     @Override
@@ -165,11 +176,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent3.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{address});
             intent3.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
             startActivity(intent3);
-        } else if (id == R.id.nav_who) {
-            Intent intent4;
-            intent4 = new Intent(this, WhoActivity.class);
-            startActivity(intent4);
         }
+//        } else if (id == R.id.nav_who) {
+//            Intent intent4;
+//            intent4 = new Intent(this, WhoActivity.class);
+//            startActivity(intent4);
+//        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

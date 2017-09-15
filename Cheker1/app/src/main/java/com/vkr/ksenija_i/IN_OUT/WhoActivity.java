@@ -6,17 +6,18 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.List;
+
 
 public class WhoActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -25,32 +26,43 @@ public class WhoActivity extends AppCompatActivity implements View.OnClickListen
     public Db_conn dbConn;
     final String LOG_TAG = "myLogs";
     String id,fio,pass,trigger;
+    ProgressBar my_bar;
+    Toast toast;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_who);
+
         edit_who = (EditText) findViewById(R.id.editText);
         edit_who2 = (EditText) findViewById(R.id.editText2);
         editText_pass = (EditText) findViewById(R.id.editText_pass);
         btn_save = (Button) findViewById(R.id.button_save);
         btn_save.setOnClickListener(this);
+        my_bar = (ProgressBar) findViewById(R.id.my_bar);
     }
 
     @Override
     public void onClick(View view) {
-        SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
-        SharedPreferences.Editor ed = pref.edit();
-        ed.clear().apply();
 
-        fio = edit_who.getText().toString();
-        pass = editText_pass.getText().toString();
+        if (edit_who.getText().length()==0 || edit_who2.getText().length()==0 || editText_pass.getText().length()==0) {
+            Toast.makeText(this, "Все поля необходимо заполнить!", Toast.LENGTH_SHORT).show();
+        } else {
+            SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
+            SharedPreferences.Editor ed = pref.edit();
+            ed.clear().apply();
 
-        new MyTask().execute();
-        save_name();
+            fio = edit_who.getText().toString();
+            pass = editText_pass.getText().toString();
+
+            new MyTask().execute();
+            save_name();
+            my_bar.setVisibility(View.VISIBLE);
+        }
     }
 
-    private void save_name() {
+    private void save_name() { //тут СЭТ
         //сохранить введенное имя
         SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
         SharedPreferences.Editor ed = pref.edit();
@@ -59,6 +71,15 @@ public class WhoActivity extends AppCompatActivity implements View.OnClickListen
         ed.apply();
     }
 
+//    private void progress () {
+//        my_bar.setVisibility(View.VISIBLE);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                my_bar.setVisibility(View.INVISIBLE);
+//            }
+//        }, 4000);
+//    }
     private class MyTask extends AsyncTask<Void, Void, String> {
         @Override
         protected String doInBackground(Void... voids) {
@@ -94,23 +115,31 @@ public class WhoActivity extends AppCompatActivity implements View.OnClickListen
         protected  void onPostExecute(String s) { // свитч 1 есть в Бд 2 нет в БД 3 админ
             // (либо вводить еще одну колонку в БД с тригером (проверять не по ай ди а по нему), либо сделать админа с №1 ай ди)
             // дальше настроить Флоат бтн по тригеру
-           if (id != null) {
+            my_bar.setVisibility(View.INVISIBLE);
+            if (id != null) {
                trigger = "1";
            } else {
                trigger = "3";
-           }
+           } // тут СЭТ другой
             SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
             SharedPreferences.Editor ed = pref.edit();
             ed.putString("trigger", trigger.toString());
             ed.apply();
 
+
             if (trigger.equals("1")) {
-                Toast.makeText(WhoActivity.this, "Вы вошли, как " + fio, Toast.LENGTH_SHORT).show();
+                toast = Toast.makeText(WhoActivity.this, "Вы вошли, как " + fio, Toast.LENGTH_SHORT);
+                TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+                if( v != null) v.setGravity(Gravity.CENTER);
+                toast.show();
                 Intent intent_back;
                 intent_back = new Intent (com.vkr.ksenija_i.IN_OUT.WhoActivity.this,MainActivity.class);
                 startActivity(intent_back);
             } else {
-                Toast.makeText(WhoActivity.this, "Неверный логин или пароль", Toast.LENGTH_SHORT).show();
+                toast = Toast.makeText(WhoActivity.this, "Неверный логин или пароль", Toast.LENGTH_SHORT);
+                TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+                if( v != null) v.setGravity(Gravity.CENTER);
+                toast.show();
                 ed.clear().apply();
             }
             super.onPostExecute(s);
