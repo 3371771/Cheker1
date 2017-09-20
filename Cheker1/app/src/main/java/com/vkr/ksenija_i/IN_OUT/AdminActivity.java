@@ -22,10 +22,9 @@ public class AdminActivity extends AppCompatActivity implements SwipeRefreshLayo
 
     public RecyclerView recyclerView;
     public MyAdapter adapter;
-    public List<Item> items; //поменяна с прайвета и те, что выше тоже
+    public List<Item> items;
     final String LOG_TAG = "myLogs";
     public Integer sizeItems1;
-    public Db_conn dbConn;
     private SwipeRefreshLayout mSwipeLayout;
 
     @Override
@@ -63,10 +62,8 @@ public class AdminActivity extends AppCompatActivity implements SwipeRefreshLayo
 
         @Override
         protected List doInBackground(Void... params) {
-            dbConn = new Db_conn();
-            Connection dbConnection;
             try {
-                dbConnection  = dbConn.getDBConnection();
+                Connection dbConnection  = Db_conn.getDBConnection();
             //  получение массива до st.close();
                 Statement st = dbConnection.createStatement();
                 ResultSet rs = st.executeQuery("SELECT fio, DATE_FORMAT(дата, '%d.%m.%Y'), время, вход FROM users ORDER BY id DESC LIMIT 0,15");
@@ -90,7 +87,7 @@ public class AdminActivity extends AppCompatActivity implements SwipeRefreshLayo
         @Override
         protected void onPostExecute(List result) {
            sizeItems1 = items1.size(); //тут передаем все записи из массива вне потока в поток и потом в адаптер
-           for (int i = 0; i < sizeItems1; i++) {
+           for (int i= 0; i < sizeItems1; i++) {
                items.add(new Item(items1.get(i).getFio(),items1.get(i).getDate(),items1.get(i).getTime(),items1.get(i).getVhod()));
             }
         //    Collections.copy(items, items1); //коприрование, но не работает

@@ -1,6 +1,5 @@
 package com.vkr.ksenija_i.IN_OUT;
 
-
 import android.util.Log;
 
 import java.sql.Connection;

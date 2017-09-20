@@ -3,7 +3,6 @@ package com.vkr.ksenija_i.IN_OUT;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -27,72 +26,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     DialogFragment dialog_info;
     MenuItem name;
     TextView textView;
-    String trigger, get_admin;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         admin = (Button) findViewById(R.id.admin);
         admin.setOnClickListener(this);
+        textView = (TextView) findViewById(R.id.textView);
         dialog_info = new Dialod_info();
-
-        triggers();
-
-        SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
-        get_admin = (pref.getString("saved_name", "").toString());
-        if (get_admin.equals("Admin")) {
-            admin.setVisibility(View.VISIBLE);
-            admin.setClickable(true);
-            textView.setText("");
-        } else {
-            admin.setVisibility(View.INVISIBLE);
-            admin.setClickable(false);
-        }
-
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        SharedPreferences pref1 = getSharedPreferences("main", MODE_PRIVATE);
-        trigger = pref1.getString("trigger", "").toString();
-        if (trigger.equals("1")) {
-            fab.setImageResource(R.drawable.ic_exit_to_app_black_24dp);
-        } else {
-            fab.setImageResource(R.drawable.ic_person_black_24dp);
-        }
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) { //в зависимости от входа
-
-                SharedPreferences pref1 = getSharedPreferences("main", MODE_PRIVATE);
-                trigger = pref1.getString("trigger", "").toString();
-
-                if (trigger.equals("1")) {
-                    Snackbar.make(view, "Выйти?", Snackbar.LENGTH_LONG)
-                            .setAction("Да", new View.OnClickListener() {
-                                @Override
-                                public void onClick( View view) {
-                                    clear();
-                                    textView.setText("Пожалуйста, выполните вход");
-                                    admin.setVisibility(View.INVISIBLE);
-                                    admin.setClickable(false);
-                                    fab.setImageResource(R.drawable.ic_person_black_24dp);
-                                }
-                            }).show();
-                } else {
-                    Snackbar.make(view, "Войти?", Snackbar.LENGTH_LONG)
-                            .setAction("Да", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    Intent intent3;
-                                    intent3 = new Intent(com.vkr.ksenija_i.IN_OUT.MainActivity.this, WhoActivity.class);
-                                    startActivity(intent3);
-                                }
-                            }).show();
-                }
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -102,6 +49,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        triggers();
+        adminButton();
+        fubButton();
     }
 
     @Override
@@ -118,9 +69,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
+        Sharedpref pref = Sharedpref.getInstance(getBaseContext());
         name = menu.findItem(R.id.fio);
-        String name1 = (pref.getString("saved_name", "").toString());
+        String name1 = pref.getName("saved_name", "");
         name.setTitle(name1);
         return super.onPrepareOptionsMenu(menu);
     }
@@ -130,8 +81,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int id = item.getItemId();
         if (id == R.id.fio) {
             //получение имени из сохраненного в памяти
-            SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
-            String fio = pref.getString("saved_name", "").toString();
+            Sharedpref pref = Sharedpref.getInstance(getBaseContext());
+            String fio = pref.getName("saved_name", "");
             //
             Toast toast = Toast.makeText(this, "Вы вошли как " + fio, Toast.LENGTH_SHORT);
             TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
@@ -189,23 +140,70 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //функция очищения SharedPreferences + обновление имени вверху
     public void clear() {
-        SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
-        SharedPreferences.Editor ed = pref.edit();
-        ed.clear().apply();
+        Sharedpref pref = Sharedpref.getInstance(getBaseContext());
+        pref.prefClear();
 
-        String name1 = (pref.getString("saved_name", "").toString());
+        String name1 = pref.getName("saved_name", "");
         name.setTitle(name1);
     }
 
     public void triggers() { // показывает надпись в зависимости от того выполнен вход или нет
-        SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
-        trigger = pref.getString("trigger", "").toString();
-        textView = (TextView) findViewById(R.id.textView);
-
-        if (trigger.equals("1")) {
+        Sharedpref pref = Sharedpref.getInstance(getBaseContext());
+        if (pref.getToken().equals("1")) {
             textView.setText("Приложите телефон к метке");
         } else {
             textView.setText("Пожалуйста, выполните вход");
         }
+    }
+
+    public void adminButton() {
+        Sharedpref pref = Sharedpref.getInstance(getBaseContext());
+        if (pref.getName("saved_name", "").equals("Admin")) {
+            admin.setVisibility(View.VISIBLE);
+            admin.setClickable(true);
+            textView.setText("");
+        } else {
+            admin.setVisibility(View.INVISIBLE);
+            admin.setClickable(false);
+        }
+    }
+
+    public void fubButton() {
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        Sharedpref pref = Sharedpref.getInstance(getBaseContext());
+        if (pref.getToken().equals("1")) {
+            fab.setImageResource(R.drawable.ic_exit_to_app_black_24dp);
+        } else {
+            fab.setImageResource(R.drawable.ic_person_black_24dp);
+        }
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Sharedpref pref = Sharedpref.getInstance(getBaseContext());//в зависимости от входа
+                if (pref.getToken().equals("1")) {
+                    Snackbar.make(view, "Выйти?", Snackbar.LENGTH_LONG)
+                            .setAction("Да", new View.OnClickListener() {
+                                @Override
+                                public void onClick( View view) {
+                                    clear();
+                                    textView.setText("Пожалуйста, выполните вход");
+                                    admin.setVisibility(View.INVISIBLE);
+                                    admin.setClickable(false);
+                                    fab.setImageResource(R.drawable.ic_person_black_24dp);
+                                }
+                            }).show();
+                } else {
+                    Snackbar.make(view, "Войти?", Snackbar.LENGTH_LONG)
+                            .setAction("Да", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent3;
+                                    intent3 = new Intent(com.vkr.ksenija_i.IN_OUT.MainActivity.this, WhoActivity.class);
+                                    startActivity(intent3);
+                                }
+                            }).show();
+                }
+            }
+        });
     }
 }
