@@ -3,7 +3,7 @@
     package="com.vkr.ksenija_i.IN_OUT"
     android:installLocation="preferExternal">
 
-    <uses-sdk android:minSdkVersion="15" />
+    <!--<uses-sdk android:minSdkVersion="16" />-->
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.NFC" />
@@ -14,7 +14,9 @@
         android:required="true" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
     <application
         android:allowBackup="true"
         android:icon="@drawable/bez2"
@@ -30,15 +32,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".MorningActivity"
-            android:label="Вход"
-            android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.vkr.ksenija_i.IN_OUT.MainActivity" />
         </activity>
         <activity
             android:name=".EveningActivity"
@@ -64,19 +57,26 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.vkr.ksenija_i.IN_OUT.MainActivity" />
-
         </activity>
+        <activity
+            android:name=".Render"
+            android:noHistory="true">
 
-        <activity android:name=".Render" android:noHistory="true" >
             <!-- автоматический запуск при контакте с НФСИ -->
             <intent-filter>
                 <action android:name="android.nfc.action.TAG_DISCOVERED" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".MorningActivity"
+            android:label="Вход"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

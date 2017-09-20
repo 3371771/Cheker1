@@ -1,7 +1,6 @@
 package com.vkr.ksenija_i.IN_OUT;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -20,9 +19,8 @@ public class Render extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_render);
 
-        SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
-        trigger = pref.getString("trigger", "").toString();
-        if (trigger.equals("1")) {
+        Sharedpref pref = Sharedpref.getInstance(getBaseContext());
+        if (pref.getToken().equals("1")) {
             performTagOperations(getIntent());
         } else {
             Intent intent_login;

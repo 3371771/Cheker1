@@ -1,7 +1,6 @@
 package com.vkr.ksenija_i.IN_OUT;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,12 +22,10 @@ public class WhoActivity extends AppCompatActivity implements View.OnClickListen
 
     EditText edit_who, edit_who2,editText_pass;
     Button btn_save;
-    public Db_conn dbConn;
     final String LOG_TAG = "myLogs";
     String id,fio,pass,trigger;
     ProgressBar my_bar;
     Toast toast;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +46,8 @@ public class WhoActivity extends AppCompatActivity implements View.OnClickListen
         if (edit_who.getText().length()==0 || edit_who2.getText().length()==0 || editText_pass.getText().length()==0) {
             Toast.makeText(this, "Все поля необходимо заполнить!", Toast.LENGTH_SHORT).show();
         } else {
-            SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
-            SharedPreferences.Editor ed = pref.edit();
-            ed.clear().apply();
+            Sharedpref pref = Sharedpref.getInstance(getBaseContext());
+            pref.prefClear();
 
             fio = edit_who.getText().toString();
             pass = editText_pass.getText().toString();
@@ -62,33 +58,20 @@ public class WhoActivity extends AppCompatActivity implements View.OnClickListen
         }
     }
 
-    private void save_name() { //тут СЭТ
+    private void save_name() {
         //сохранить введенное имя
-        SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
-        SharedPreferences.Editor ed = pref.edit();
-        ed.putString("saved_name", edit_who.getText().toString());
-        ed.putString("saved_name2", edit_who2.getText().toString());
-        ed.apply();
+        Sharedpref pref = Sharedpref.getInstance(getBaseContext());
+        pref.saveName("saved_name", edit_who.getText().toString());
+        pref.saveName("saved_name2", edit_who2.getText().toString());
+
     }
 
-//    private void progress () {
-//        my_bar.setVisibility(View.VISIBLE);
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                my_bar.setVisibility(View.INVISIBLE);
-//            }
-//        }, 4000);
-//    }
     private class MyTask extends AsyncTask<Void, Void, String> {
         @Override
         protected String doInBackground(Void... voids) {
-                dbConn = new Db_conn();
-                Connection dbConnection;
 
                 try {
-                    dbConnection = dbConn.getDBConnection();
-
+                    Connection dbConnection = Db_conn.getDBConnection();
                     PreparedStatement select = dbConnection.prepareStatement("SELECT id FROM user_data WHERE ФИО = ? AND пароль = ?");
                     select.setString(1, fio);
                     select.setString(2, pass);
@@ -119,15 +102,11 @@ public class WhoActivity extends AppCompatActivity implements View.OnClickListen
             if (id != null) {
                trigger = "1";
            } else {
-               trigger = "3";
-           } // тут СЭТ другой
-            SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
-            SharedPreferences.Editor ed = pref.edit();
-            ed.putString("trigger", trigger.toString());
-            ed.apply();
-
-
+               trigger = "0";
+           }
+            Sharedpref pref = Sharedpref.getInstance(getBaseContext());
             if (trigger.equals("1")) {
+                pref.saveToken("1");
                 toast = Toast.makeText(WhoActivity.this, "Вы вошли, как " + fio, Toast.LENGTH_SHORT);
                 TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
                 if( v != null) v.setGravity(Gravity.CENTER);
@@ -136,11 +115,12 @@ public class WhoActivity extends AppCompatActivity implements View.OnClickListen
                 intent_back = new Intent (com.vkr.ksenija_i.IN_OUT.WhoActivity.this,MainActivity.class);
                 startActivity(intent_back);
             } else {
+                pref.saveToken("0");
                 toast = Toast.makeText(WhoActivity.this, "Неверный логин или пароль", Toast.LENGTH_SHORT);
                 TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
                 if( v != null) v.setGravity(Gravity.CENTER);
                 toast.show();
-                ed.clear().apply();
+                pref.prefClear();
             }
             super.onPostExecute(s);
         }

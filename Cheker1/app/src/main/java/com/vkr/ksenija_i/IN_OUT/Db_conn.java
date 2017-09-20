@@ -1,6 +1,5 @@
 package com.vkr.ksenija_i.IN_OUT;
 
-
 import android.util.Log;
 
 import java.sql.Connection;
@@ -17,11 +16,11 @@ public class Db_conn {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Properties properties = new Properties();
-            properties.setProperty("user", "host1213291_test"); //user
-            properties.setProperty("password", "NdxW0YY2"); //user
-            properties.setProperty("useUnicode", "true");
+            properties.setProperty("user", "**"); //user
+            properties.setProperty("password", "**"); //user
+            properties.setProperty("useUnicode", "**");
             properties.setProperty("characterEncoding", "UTF-8");
-            dbConnection = DriverManager.getConnection("jdbc:mysql://mysql51.hostland.ru/host1213291_test", properties);
+            dbConnection = DriverManager.getConnection("**", properties);
             return dbConnection;
 
         } catch (java.sql.SQLException e) {
