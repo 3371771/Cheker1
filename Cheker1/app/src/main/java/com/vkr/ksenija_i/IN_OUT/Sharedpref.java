@@ -4,7 +4,6 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Context;
 
-
 public class Sharedpref extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;

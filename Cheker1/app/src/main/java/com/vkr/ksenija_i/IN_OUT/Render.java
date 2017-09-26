@@ -12,8 +12,6 @@ import android.os.Bundle;
 
 public class Render extends AppCompatActivity {
 
-    String trigger;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,11 +27,6 @@ public class Render extends AppCompatActivity {
         }
     }
 
-//    @Override
-//    protected void onNewIntent(Intent intent) {
-//        performTagOperations(intent);
-//    }
-
     private void performTagOperations(Intent intent) {
         String action = intent.getAction();
         if (action.equals(NfcAdapter.ACTION_NDEF_DISCOVERED)) {
@@ -48,7 +41,7 @@ public class Render extends AppCompatActivity {
                 byte[] text = new byte[textLength];
                 System.arraycopy(payload, 1 + langLength, text, 0, textLength);
 
-                switch (new String(text)) {
+                switch (new String(text)) { // преобразование и ТЭГА стрингу и сравненеи
                     case "1":
                         Intent intent2;
                         intent2 = new Intent(this, MorningActivity.class);

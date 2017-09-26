@@ -118,43 +118,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int id = item.getItemId();
         String address = "3371771@list.ru";
         String subject = "Вопрос по приложению IN/OUT";
-        if (id == R.id.nav_info) {
-            dialog_info.show(getFragmentManager(), "dialog_info");
-        } else if (id == R.id.nav_help) {
-            Intent intent3;
-            intent3 = new Intent(Intent.ACTION_SEND);
-            intent3.setType("plain/text");
-            intent3.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{address});
-            intent3.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
-            startActivity(intent3);
+        switch (id) {
+            case (R.id.nav_info):
+                dialog_info.show(getFragmentManager(), "dialog_info");
+                break;
+            case (R.id.nav_help):
+                Intent intent3;
+                intent3 = new Intent(Intent.ACTION_SEND);
+                intent3.setType("plain/text");
+                intent3.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{address});
+                intent3.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
+                startActivity(intent3);
+                break;
+            default:
+                break;
         }
-//        } else if (id == R.id.nav_who) {
-//            Intent intent4;
-//            intent4 = new Intent(this, WhoActivity.class);
-//            startActivity(intent4);
-//        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    //функция очищения SharedPreferences + обновление имени вверху
     public void clear() {
         Sharedpref pref = Sharedpref.getInstance(getBaseContext());
         pref.prefClear();
 
         String name1 = pref.getName("saved_name", "");
         name.setTitle(name1);
-    }
+    } //функция очищения SharedPreferences + обновление имени вверху
 
-    public void triggers() { // показывает надпись в зависимости от того выполнен вход или нет
+    public void triggers() {
         Sharedpref pref = Sharedpref.getInstance(getBaseContext());
         if (pref.getToken().equals("1")) {
             textView.setText("Приложите телефон к метке");
         } else {
             textView.setText("Пожалуйста, выполните вход");
         }
-    }
+    } // показывает надпись в зависимости от того выполнен вход или нет
 
     public void adminButton() {
         Sharedpref pref = Sharedpref.getInstance(getBaseContext());
@@ -166,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             admin.setVisibility(View.INVISIBLE);
             admin.setClickable(false);
         }
-    }
+    } // показывать или нет кнопку админки (в зависимости от логина)
 
     public void fubButton() {
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -205,5 +204,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
-    }
+    } // картиникa и функции Фаба в зависимости от входа
 }

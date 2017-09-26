@@ -18,7 +18,7 @@ public class Db_conn {
             Properties properties = new Properties();
             properties.setProperty("user", "**"); //user
             properties.setProperty("password", "**"); //user
-            properties.setProperty("useUnicode", "**");
+            properties.setProperty("useUnicode", "true");
             properties.setProperty("characterEncoding", "UTF-8");
             dbConnection = DriverManager.getConnection("**", properties);
             return dbConnection;

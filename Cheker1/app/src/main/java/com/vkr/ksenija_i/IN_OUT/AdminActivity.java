@@ -8,17 +8,17 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
-public class AdminActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+public class AdminActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     public RecyclerView recyclerView;
     public MyAdapter adapter;
@@ -27,10 +27,12 @@ public class AdminActivity extends AppCompatActivity implements SwipeRefreshLayo
     public Integer sizeItems1;
     private SwipeRefreshLayout mSwipeLayout;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
+
 
         mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
         mSwipeLayout.setOnRefreshListener(this);
@@ -96,4 +98,6 @@ public class AdminActivity extends AppCompatActivity implements SwipeRefreshLayo
             super.onPostExecute(result);
         }
     }
+
+
 }

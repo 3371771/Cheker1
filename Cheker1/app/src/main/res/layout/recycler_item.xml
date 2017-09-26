@@ -14,8 +14,11 @@
         android:layout_height="72dp"
         card_view:cardCornerRadius="2dp"
         card_view:cardElevation="2dp"
-        card_view:cardUseCompatPadding="true">
-        <!--android:elevation="1dp"-->
+        card_view:cardUseCompatPadding="true"
+        android:foreground="?android:attr/selectableItemBackground">
+        <!--выше кликабельность карточки (визуализация нажанитя)-->
+        <!-- еще выше подъем, как в гугле>-->
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
