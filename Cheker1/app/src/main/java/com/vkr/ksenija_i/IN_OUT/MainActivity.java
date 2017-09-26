@@ -146,14 +146,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         name.setTitle(name1);
     } //функция очищения SharedPreferences + обновление имени вверху
 
+<<<<<<< HEAD
     public void triggers() {
+=======
+    public void triggers() { // показывает надпись в зависимости от того выполнен вход или нет
+>>>>>>> 5d9f2bcdcd05b0b6b6df46b37074d0a4138b6632
         Sharedpref pref = Sharedpref.getInstance(getBaseContext());
         if (pref.getToken().equals("1")) {
             textView.setText("Приложите телефон к метке");
         } else {
             textView.setText("Пожалуйста, выполните вход");
         }
+<<<<<<< HEAD
     } // показывает надпись в зависимости от того выполнен вход или нет
+=======
+    }
+>>>>>>> 5d9f2bcdcd05b0b6b6df46b37074d0a4138b6632
 
     public void adminButton() {
         Sharedpref pref = Sharedpref.getInstance(getBaseContext());
@@ -165,7 +173,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             admin.setVisibility(View.INVISIBLE);
             admin.setClickable(false);
         }
+<<<<<<< HEAD
     } // показывать или нет кнопку админки (в зависимости от логина)
+=======
+    }
+>>>>>>> 5d9f2bcdcd05b0b6b6df46b37074d0a4138b6632
 
     public void fubButton() {
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -204,5 +216,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
+<<<<<<< HEAD
     } // картиникa и функции Фаба в зависимости от входа
+=======
+    }
+>>>>>>> 5d9f2bcdcd05b0b6b6df46b37074d0a4138b6632
 }

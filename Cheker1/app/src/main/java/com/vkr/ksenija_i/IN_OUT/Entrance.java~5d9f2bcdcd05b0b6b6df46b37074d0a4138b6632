@@ -1,12 +1,12 @@
 package com.vkr.ksenija_i.IN_OUT;
 
-<<<<<<< HEAD:Cheker1/app/src/main/java/com/vkr/ksenija_i/IN_OUT/Entrance.java
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,19 +20,10 @@ public class Entrance extends AppCompatActivity {
     final String LOG_TAG = "myLogs";
     String fio, fio2,toDo;
     Animation anim;
-=======
-import android.os.Bundle;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-public class MorningActivity extends Entrance {
->>>>>>> 5d9f2bcdcd05b0b6b6df46b37074d0a4138b6632:Cheker1/app/src/main/java/com/vkr/ksenija_i/IN_OUT/MorningActivity.java
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-<<<<<<< HEAD:Cheker1/app/src/main/java/com/vkr/ksenija_i/IN_OUT/Entrance.java
     }
 
     protected void start() {
@@ -71,15 +62,5 @@ public class MorningActivity extends Entrance {
         Intent intent_back;
         intent_back = new Intent (this,MainActivity.class);
         startActivity(intent_back);
-=======
-        setContentView(R.layout.activity_morning);
-
-        toDo = "пришел(-а)";
-        imageView = (ImageView) findViewById(R.id.imageView5);
-        anim = AnimationUtils.loadAnimation(this, R.anim.myanim);
-        textView9 = (TextView) findViewById(R.id.textView9);
-        start();
->>>>>>> 5d9f2bcdcd05b0b6b6df46b37074d0a4138b6632:Cheker1/app/src/main/java/com/vkr/ksenija_i/IN_OUT/MorningActivity.java
     }
 }
-

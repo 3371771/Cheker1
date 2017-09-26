@@ -26,7 +26,11 @@ public class WhoActivity extends AppCompatActivity implements View.OnClickListen
     String id,fio,pass,trigger;
     ProgressBar my_bar;
     Toast toast;
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 5d9f2bcdcd05b0b6b6df46b37074d0a4138b6632
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +68,15 @@ public class WhoActivity extends AppCompatActivity implements View.OnClickListen
         pref.saveName("saved_name", edit_who.getText().toString());
         pref.saveName("saved_name2", edit_who2.getText().toString());
 
+<<<<<<< HEAD
+=======
+        //старый вариант
+//        SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
+//        SharedPreferences.Editor ed = pref.edit();
+//        ed.putString("saved_name", edit_who.getText().toString());
+//        ed.putString("saved_name2", edit_who2.getText().toString());
+//        ed.apply();
+>>>>>>> 5d9f2bcdcd05b0b6b6df46b37074d0a4138b6632
     }
 
     private class MyTask extends AsyncTask<Void, Void, String> {
@@ -105,6 +118,14 @@ public class WhoActivity extends AppCompatActivity implements View.OnClickListen
                trigger = "0";
            }
             Sharedpref pref = Sharedpref.getInstance(getBaseContext());
+<<<<<<< HEAD
+=======
+//старый вариант
+//            SharedPreferences pref = getSharedPreferences("main", MODE_PRIVATE);
+//            SharedPreferences.Editor ed = pref.edit();
+//            ed.putString("trigger", trigger.toString());
+//            ed.apply();
+>>>>>>> 5d9f2bcdcd05b0b6b6df46b37074d0a4138b6632
             if (trigger.equals("1")) {
                 pref.saveToken("1");
                 toast = Toast.makeText(WhoActivity.this, "Вы вошли, как " + fio, Toast.LENGTH_SHORT);
