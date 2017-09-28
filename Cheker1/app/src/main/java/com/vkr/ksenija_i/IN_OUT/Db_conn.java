@@ -20,7 +20,7 @@ public class Db_conn {
             properties.setProperty("password", "**"); //user
             properties.setProperty("useUnicode", "true");
             properties.setProperty("characterEncoding", "UTF-8");
-            dbConnection = DriverManager.getConnection("**", properties);
+            dbConnection = DriverManager.getConnection("jdbc:mysql://**", properties);
             return dbConnection;
 
         } catch (java.sql.SQLException e) {
