@@ -44,5 +44,4 @@ public class Sharedpref extends AppCompatActivity {
     public String getName(String name, String value ) {
         return sharedPreferences.getString(name, value);
     }
-
 }

@@ -24,14 +24,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private List<Item> items;
     private Context mContext;
-    final String LOG_TAG = "myLogs";
-    String fio1, tel;
+    private String fio1, tel;
 
 
-    public MyAdapter(List<Item> items, Context mContext) { //конструктор
+    MyAdapter(List<Item> items, Context mContext) {
         this.items = items;
         this.mContext = mContext;
-    }
+    } //конструктор
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -46,7 +45,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.date.setText(itemList.getDate());
         holder.time.setText(itemList.getTime());
         holder.vhod.setText(itemList.getVhod());
-        //holder.card_view.setClickable(true);
+
 
         // изменения цвета бэкграунда в зависисмости от того выход или вход
 //        String condition = itemList.getVhod();
@@ -82,16 +81,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         return items.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
-        public CardView card_view;
+        CardView card_view;
 
-        public TextView fio;
-        public TextView date;
-        public TextView time;
-        public TextView vhod;
+        TextView fio;
+        TextView date;
+        TextView time;
+        TextView vhod;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             card_view = (CardView) itemView.findViewById(R.id.card);
             fio = (TextView) itemView.findViewById(R.id.fio);
@@ -101,12 +100,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }
     }
 
-
     private class MyTask extends AsyncTask<Void, Void, String> {
 
         @Override
         protected String doInBackground(Void... voids) {
 
+            String LOG_TAG = "myLogs";
             try {
                 Connection dbConnection = Db_conn.getDBConnection();
                 PreparedStatement select = dbConnection.prepareStatement("SELECT телефон FROM user_data WHERE ФИО = ?");

@@ -41,7 +41,7 @@ public class Render extends AppCompatActivity {
                 byte[] text = new byte[textLength];
                 System.arraycopy(payload, 1 + langLength, text, 0, textLength);
 
-                switch (new String(text)) { // преобразование и ТЭГА стрингу и сравненеи
+                switch (new String(text)) { // преобразование и ТЭГА стрингу и сравнение
                     case "1":
                         Intent intent2;
                         intent2 = new Intent(this, MorningActivity.class);

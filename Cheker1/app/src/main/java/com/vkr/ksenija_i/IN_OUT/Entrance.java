@@ -35,7 +35,7 @@ public class Entrance extends AppCompatActivity {
         textView9.setText(fio2);
     }
 
-    public class MyTask extends AsyncTask<Void, Void, String> {
+    private class MyTask extends AsyncTask<Void, Void, String> {
         @Override
         protected String doInBackground(Void... voids) {
             try {

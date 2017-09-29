@@ -1,47 +1,47 @@
 package com.vkr.ksenija_i.IN_OUT;
 
-public class Item {
+ class Item {
     private String fio;
     private String date;
     private String time;
     private String vhod;
 
-    public Item(String fio, String date, String time, String vhod) {
+     Item(String fio, String date, String time, String vhod) {
         this.fio = fio;
         this.date = date;
         this.time = time;
         this.vhod = vhod;
     }
 
-    public String getFio() {
+    String getFio() {
         return fio;
     }
 
-    public String getDate() {
+    String getDate() {
         return date;
     }
 
-    public String getTime() {
+    String getTime() {
         return time;
     }
 
-    public String getVhod() {
+    String getVhod() {
         return vhod;
     }
 
-    public void setFio(String fio) {
+    void setFio(String fio) {
         this.fio = fio;
     }
 
-    public void setDate(String date) {
+    void setDate(String date) {
         this.date = date;
     }
 
-    public void setTime(String time) {
+    void setTime(String time) {
         this.time = time;
     }
 
-    public void setVhod(String vhod) {
+    void setVhod(String vhod) {
         this.vhod = vhod;
     }
 }
